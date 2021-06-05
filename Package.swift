@@ -9,12 +9,13 @@ let package = Package(
             targets: ["SVGWrapper"]),
     ],
     dependencies: [
+        /* Should probably lock to current version */
         .package(url: "https://github.com/mchoe/SwiftSVG", .upToNextMajor(from: "2.3.2"))
     ],
     targets: [
         .target(
             name: "SVGWrapper",
-            dependencies: []),
+            dependencies: ["SwiftSVG"]),
         .testTarget(
             name: "SVGWrapperTests",
             dependencies: ["SVGWrapper"]),
