@@ -11,14 +11,11 @@ let package = Package(
     ],
     dependencies: [
         /* Should probably lock to current version */
-        .package(url: "https://github.com/mchoe/SwiftSVG", .upToNextMajor(from: "2.3.2"))
+        .package(url: "https://github.com/swhitty/SwiftDraw.git", .upToNextMajor(from: "0.8.0"))
     ],
     targets: [
         .target(
             name: "SVGWrapper",
-            dependencies: ["SwiftSVG"]),
-        .testTarget(
-            name: "SVGWrapperTests",
-            dependencies: ["SVGWrapper"]),
+            dependencies: ["SwiftDraw"])
     ]
 )

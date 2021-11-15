@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "SwiftSVG",
-        "repositoryURL": "https://github.com/mchoe/SwiftSVG",
+        "package": "SwiftDraw",
+        "repositoryURL": "https://github.com/swhitty/SwiftDraw.git",
         "state": {
           "branch": null,
-          "revision": "c3a8866a25ace169ee8e5c037670ba14aa59606f",
-          "version": "2.3.2"
+          "revision": "e558bda32e3ceb8f29b6f55d99be3f7274011db7",
+          "version": "0.8.0"
         }
       }
     ]
