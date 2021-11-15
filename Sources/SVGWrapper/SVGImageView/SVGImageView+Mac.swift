@@ -10,8 +10,8 @@ import SwiftDraw
  * svgImgView.anchorAndSize(to: self, wifth: 200, height: 200, align: .centerCenter, alignTo: .centerCenter)
  */
 public class SVGImageView: NSImageView {
-   let foregroundColor: UIColor
-   let bgColor: UIColor
+   let foregroundColor: NSColor
+   let bgColor: NSColor
    public init(url: String, foregroundColor: NSColor = .black, backgroundColor: NSColor = .clear/*, contentMode: NSView.ContentMode = .scaleAspectFill*/) {
       self.foregroundColor = foregroundColor
       self.bgColor = backgroundColor
@@ -45,14 +45,14 @@ extension SVGImageView {
    /**
     * Style UIImageView
     */
-   public func style(foregroundColor: UIColor, backgroundColor: UIColor) {
+   public func style(foregroundColor: NSColor, backgroundColor: NSColor) {
       self.contentTintColor = foregroundColor
       self.layer?.backgroundColor = backgroundColor.cgColor
    }
    /**
     * Image
-    * - Note: on tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4
-    * - Note: alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
+    * - Note: On tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4
+    * - Note: Alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
     */
    private static func createImage(svgURLStr: String) -> NSImage? {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!

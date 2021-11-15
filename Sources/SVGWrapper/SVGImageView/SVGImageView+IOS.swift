@@ -22,9 +22,11 @@ public class SVGImageView: UIImageView {
       self.foregroundColor = foregroundColor
       self.bgColor = backgroundColor
       let img: UIImage? = Self.createImage(svgURLStr: url)
+      Swift.print("img:  \(img)")
+      Swift.print("img?.size:  \(img?.size)")
       super.init(image: img)
-      style(foregroundColor: foregroundColor, backgroundColor: backgroundColor)
       self.contentMode = .scaleAspectFit // .scaleToFill .scaleAspectFit .scaleAspectFill // .center
+      style(foregroundColor: self.foregroundColor, backgroundColor: self.bgColor)
    }
    /**
     * Boilerplate
@@ -49,14 +51,15 @@ extension SVGImageView {
     * Style UIImageView
     */
    public func style(foregroundColor: UIColor, backgroundColor: UIColor) {
-      self.backgroundColor = backgroundColor
       self.tintColor = foregroundColor
+      self.backgroundColor = backgroundColor
    }
    /**
     * Image
     */
    public static func createImage(svgURLStr: String) -> UIImage? {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
+      Swift.print("svgURL:  \(svgURL)")
       guard let image = Image(fileURL: svgURL) else { return nil }
       let rasteredImage: UIImage = image.rasterize()
       let templatedImage = rasteredImage.withRenderingMode(.alwaysTemplate) // render as template (I presume its needed to support tint color?)
