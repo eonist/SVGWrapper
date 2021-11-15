@@ -41,7 +41,7 @@ extension SVGImageView {
    /**
     * Set image
     */
-   func setImage(url: String) {
+   public func setImage(url: String) {
       self.image = Self.createImage(svgURLStr: url)
       style(foregroundColor: foregroundColor, backgroundColor: bgColor)
    }
