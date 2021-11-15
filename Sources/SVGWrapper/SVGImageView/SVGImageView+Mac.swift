@@ -10,13 +10,16 @@ import SwiftDraw
  * svgImgView.anchorAndSize(to: self, wifth: 200, height: 200, align: .centerCenter, alignTo: .centerCenter)
  */
 public class SVGImageView: NSImageView {
+   let foregroundColor: UIColor
+   let bgColor: UIColor
    public init(url: String, foregroundColor: NSColor = .black, backgroundColor: NSColor = .clear/*, contentMode: NSView.ContentMode = .scaleAspectFill*/) {
+      self.foregroundColor = foregroundColor
+      self.bgColor = backgroundColor
       let img: NSImage? = Self.createImage(svgURLStr: url)
       super.init(frame: .zero)
       self.image = img
-      self.contentTintColor = foregroundColor
       self.wantsLayer = true // if true then view is layer backed
-      self.layer?.backgroundColor = backgroundColor.cgColor
+      style(foregroundColor: foregroundColor, backgroundColor: backgroundColor)
       // self.scaleUnitSquare(to: .init(width: 0, height: 0))
       // NSImageScaleAxesIndependently
    }
@@ -32,6 +35,20 @@ public class SVGImageView: NSImageView {
  * Helper
  */
 extension SVGImageView {
+   /**
+    * Set image
+    */
+   func setImage(url: String) {
+      self.image = Self.createImage(svgURLStr: url)
+      style(foregroundColor: foregroundColor, backgroundColor: bgColor)
+   }
+   /**
+    * Style UIImageView
+    */
+   public func style(foregroundColor: UIColor, backgroundColor: UIColor) {
+      self.contentTintColor = foregroundColor
+      self.layer?.backgroundColor = backgroundColor.cgColor
+   }
    /**
     * Image
     * - Note: on tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4

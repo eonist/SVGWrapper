@@ -9,6 +9,8 @@ import FileSugar
  * svgImgView.anchorAndSize(to: self, wifth: 200, height: 200, align: .centerCenter, alignTo: .centerCenter)
  */
 public class SVGImageView: UIImageView {
+   let foregroundColor: UIColor
+   let bgColor: UIColor
    /**
     * - Parameters:
     *   - url: "soundcloud.svg"
@@ -17,10 +19,11 @@ public class SVGImageView: UIImageView {
     *   - contentMode: .scaleAspectFill etc
     */
    public init(url: String, foregroundColor: UIColor = .black, backgroundColor: UIColor = .clear, contentMode: UIView.ContentMode = .scaleAspectFill) {
+      self.foregroundColor = foregroundColor
+      self.bgColor = backgroundColor
       let img: UIImage? = Self.createImage(svgURLStr: url)
       super.init(image: img)
-      self.backgroundColor = backgroundColor
-      self.tintColor = foregroundColor
+      style(foregroundColor: foregroundColor, backgroundColor: backgroundColor)
       self.contentMode = .scaleAspectFit // .scaleToFill .scaleAspectFit .scaleAspectFill // .center
    }
    /**
@@ -36,9 +39,23 @@ public class SVGImageView: UIImageView {
  */
 extension SVGImageView {
    /**
+    * Set image
+    */
+   func setImage(url: String) {
+      self.image = Self.createImage(svgURLStr: url)
+      style(foregroundColor: foregroundColor, backgroundColor: bgColor)
+   }
+   /**
+    * Style UIImageView
+    */
+   public func style(foregroundColor: UIColor, backgroundColor: UIColor) {
+      self.backgroundColor = backgroundColor
+      self.tintColor = foregroundColor
+   }
+   /**
     * Image
     */
-   private static func createImage(svgURLStr: String) -> UIImage? {
+   public static func createImage(svgURLStr: String) -> UIImage? {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
       guard let image = Image(fileURL: svgURL) else { return nil }
       let rasteredImage: UIImage = image.rasterize()
