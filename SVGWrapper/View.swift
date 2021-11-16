@@ -10,11 +10,12 @@ class View: UIView {
     */
    override init(frame: CGRect) {
       super.init(frame: frame)
-      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/check.svg" // soundcloud.svg
+      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/user.svg" // soundcloud.svg
 //      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/stack-overflow.svg " //plus.svgsoundcloud.svg
-      let imageView = SVGImageView.init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen, contentMode: .scaleAspectFit)
+      let size: CGSize = .init(width: 200, height: 200)
+      let imageView = SVGImageView.init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen, contentMode: .scaleAspectFit, preferedSize: size)
       addSubview(imageView)
-      imageView.anchorAndSize(to: self, width: 200, height: 200, align: .centerCenter, alignTo: .centerCenter)
+      imageView.anchorAndSize(to: self, width: size.width, height: size.height, align: .centerCenter, alignTo: .centerCenter)
    }
    /**
     * Boilerplate

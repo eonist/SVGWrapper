@@ -11,17 +11,20 @@ import FileSugar
 public class SVGImageView: UIImageView {
    let foregroundColor: UIColor
    let bgColor: UIColor
+   let preferedSize: CGSize?
    /**
     * - Parameters:
     *   - url: "soundcloud.svg"
     *   - foregroundColor: .red
     *   - backgroundColor: .blue
     *   - contentMode: .scaleAspectFill etc
+    *   - preferedSize: the size that the icon is rasterized at
     */
-   public init(url: String, foregroundColor: UIColor = .black, backgroundColor: UIColor = .clear, contentMode: UIView.ContentMode = .scaleAspectFill) {
+   public init(url: String, foregroundColor: UIColor = .black, backgroundColor: UIColor = .clear, contentMode: UIView.ContentMode = .scaleAspectFill, preferedSize: CGSize? = nil) {
       self.foregroundColor = foregroundColor
       self.bgColor = backgroundColor
-      let img: UIImage? = Self.createImage(svgURLStr: url)
+      self.preferedSize = preferedSize
+      let img: UIImage? = Self.createImage(svgURLStr: url, preferedSize: preferedSize)
 //      Swift.print("file exists: \(FileAsserter.exists(path: url))")
 //      Swift.print("img: \(img)")
 //      Swift.print("img?.size: \(img?.size)")
@@ -45,7 +48,7 @@ extension SVGImageView {
     * Set image
     */
    public func setImage(url: String) {
-      self.image = Self.createImage(svgURLStr: url)
+      self.image = Self.createImage(svgURLStr: url, preferedSize: preferedSize)
       style(foregroundColor: foregroundColor, backgroundColor: bgColor)
    }
    /**
@@ -58,11 +61,11 @@ extension SVGImageView {
    /**
     * Image
     */
-   public static func createImage(svgURLStr: String) -> UIImage? {
+   public static func createImage(svgURLStr: String, preferedSize: CGSize?) -> UIImage? {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
 //      Swift.print("svgURL:  \(svgURL)")
       guard let image = Image(fileURL: svgURL) else { return nil }
-      let rasteredImage: UIImage = image.rasterize()
+      let rasteredImage: UIImage = image.rasterize(preferedSize)
       let templatedImage = rasteredImage.withRenderingMode(.alwaysTemplate) // render as template (I presume its needed to support tint color?)
       return templatedImage // let uiImage = UIImage.init(cgImage: templated.cgImage!, scale: rasteredImage.scale, orientation: rasteredImage.imageOrientation)
    }

@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="check" transform="translate(3.000000, 5.500000)" fill="#000000" fill-rule="nonzero">
+            <path d="M6,10.5857864 L16.2928932,0.292893219 C16.6834175,-0.09763107 17.3165825,-0.09763107 17.7071068,0.292893219 C18.0976311,0.683417511 18.0976311,1.31658249 17.7071068,1.70710678 L6.70710678,12.7071068 C6.31658249,13.0976311 5.68341751,13.0976311 5.29289322,12.7071068 L0.292893219,7.70710678 C-0.09763107,7.31658249 -0.09763107,6.68341751 0.292893219,6.29289322 C0.683417511,5.90236893 1.31658249,5.90236893 1.70710678,6.29289322 L6,10.5857864 Z" id="Path"></path>
+        </g>
+    </g>
+</svg>
