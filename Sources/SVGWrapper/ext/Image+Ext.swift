@@ -12,8 +12,8 @@ extension Image {
       return rasterize(with: size ?? self.size)
    }
    /**
-    * This code is in SwiftDraw as well, but isnt public etc
-    * - Fixme: ⚠️️ we might have to add to macOS as well?
+    * This code is in SwiftDraw as well, but isnt public, or it is, but NSImage has the same name so maybe blocking it?
+    * - Fixme: ⚠️️ we might have to add to macOS as well? macos works with the swiftdraw call, its not blocked
     */
    func rasterize(with size: CGSize) -> UIImage {
       let f = UIGraphicsImageRendererFormat.default()
@@ -26,5 +26,4 @@ extension Image {
       }
    }
 }
-
 #endif

@@ -18,7 +18,7 @@ public class SVGImageView: UIImageView {
     *   - foregroundColor: .red
     *   - backgroundColor: .blue
     *   - contentMode: .scaleAspectFill etc
-    *   - preferedSize: the size that the icon is rasterized at
+    *   - preferedSize: the size that the icon is rasterized at (if nothing is provided, the size of the svg is used)
     */
    public init(url: String, foregroundColor: UIColor = .black, backgroundColor: UIColor = .clear, contentMode: UIView.ContentMode = .scaleAspectFill, preferedSize: CGSize? = nil) {
       self.foregroundColor = foregroundColor
@@ -65,7 +65,7 @@ extension SVGImageView {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
 //      Swift.print("svgURL:  \(svgURL)")
       guard let image = Image(fileURL: svgURL) else { return nil }
-      let rasteredImage: UIImage = image.rasterize(preferedSize)
+      let rasteredImage: UIImage = image.rasterize(with: preferedSize ?? image.size)
       let templatedImage = rasteredImage.withRenderingMode(.alwaysTemplate) // render as template (I presume its needed to support tint color?)
       return templatedImage // let uiImage = UIImage.init(cgImage: templated.cgImage!, scale: rasteredImage.scale, orientation: rasteredImage.imageOrientation)
    }

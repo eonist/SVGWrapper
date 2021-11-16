@@ -28,10 +28,11 @@ open class View: NSView {
       Swift.print("hello world")
       self.wantsLayer = true/*if true then view is layer backed*/
       self.layer?.backgroundColor = NSColor.systemYellow.cgColor
-      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/soundcloud.svg" // soundcloud.svg
-      let imageView = SVGImageView.init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen/*, contentMode: .scaleAspectFit*/)
+      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/user.svg" // soundcloud.svg
+      let size: CGSize = .init(width: 200, height: 200)
+      let imageView = SVGImageView.init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen/*, contentMode: .scaleAspectFit*/, preferedSize: size)
       addSubview(imageView)
-      imageView.anchorAndSize(to: self, width: 200, height: 200, align: .centerCenter, alignTo: .centerCenter)
+      imageView.anchorAndSize(to: self, width: size.width, height: size.height, align: .centerCenter, alignTo: .centerCenter)
    }
    /**
     * Boilerplate

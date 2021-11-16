@@ -12,10 +12,15 @@ import SwiftDraw
 public class SVGImageView: NSImageView {
    let foregroundColor: NSColor
    let bgColor: NSColor
-   public init(url: String, foregroundColor: NSColor = .black, backgroundColor: NSColor = .clear/*, contentMode: NSView.ContentMode = .scaleAspectFill*/) {
+   let preferedSize: CGSize?
+   /**
+    * - Important: ⚠️️ Unlike iOS, macOS doesnt seem to scale the svg, so prefered size is required, it seems at least for some svgs
+    */
+   public init(url: String, foregroundColor: NSColor = .black, backgroundColor: NSColor = .clear/*, contentMode: NSView.ContentMode = .scaleAspectFill*/, preferedSize: CGSize? = nil) {
       self.foregroundColor = foregroundColor
       self.bgColor = backgroundColor
-      let img: NSImage? = Self.createImage(svgURLStr: url)
+      self.preferedSize = preferedSize
+      let img: NSImage? = Self.createImage(svgURLStr: url, preferedSize: preferedSize)
       super.init(frame: .zero)
       self.image = img
       self.wantsLayer = true // if true then view is layer backed
@@ -39,7 +44,7 @@ extension SVGImageView {
     * Set image
     */
    func setImage(url: String) {
-      self.image = Self.createImage(svgURLStr: url)
+      self.image = Self.createImage(svgURLStr: url, preferedSize: self.preferedSize)
       style(foregroundColor: foregroundColor, backgroundColor: bgColor)
    }
    /**
@@ -54,10 +59,10 @@ extension SVGImageView {
     * - Note: On tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4
     * - Note: Alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
     */
-   private static func createImage(svgURLStr: String) -> NSImage? {
+   private static func createImage(svgURLStr: String, preferedSize: CGSize?) -> NSImage? {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
       guard let image = Image(fileURL: svgURL) else { return nil }
-      let rasteredImage: NSImage = image.rasterize()
+      let rasteredImage: NSImage = image.rasterize(with: preferedSize ?? image.size) // preferedSize
       rasteredImage.isTemplate = true // let templatedImage = rasteredImage.withRenderingMode(.alwaysTemplate) // render as template (I presume its needed to support tint color?)
       return rasteredImage // templatedImage // let uiImage = UIImage.init(cgImage: templated.cgImage!, scale: rasteredImage.scale, orientation: rasteredImage.imageOrientation)
    }
