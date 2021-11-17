@@ -14,7 +14,7 @@ public class SVGImageView: NSImageView {
    let bgColor: NSColor
    let preferedSize: CGSize?
    /**
-    * - Important: ⚠️️ Unlike iOS, macOS doesnt seem to scale the svg, so prefered size is required, it seems at least for some svgs
+    * - Important: ⚠️️ Unlike iOS, macOS doesn't seem to scale the svg, so prefered size is required, it seems at least for some svgs
     */
    public init(url: String, foregroundColor: NSColor = .black, backgroundColor: NSColor = .clear/*, contentMode: NSView.ContentMode = .scaleAspectFill*/, preferedSize: CGSize? = nil) {
       self.foregroundColor = foregroundColor
@@ -43,14 +43,14 @@ extension SVGImageView {
    /**
     * Set image
     */
-   func setImage(url: String) {
+   public func setImage(url: String) {
       self.image = Self.createImage(svgURLStr: url, preferedSize: self.preferedSize)
       style(foregroundColor: foregroundColor, backgroundColor: bgColor)
    }
    /**
     * Style UIImageView
     */
-   public func style(foregroundColor: NSColor, backgroundColor: NSColor) {
+   public func style(foregroundColor: NSColor, backgroundColor: NSColor = .clear) {
       self.contentTintColor = foregroundColor
       self.layer?.backgroundColor = backgroundColor.cgColor
    }

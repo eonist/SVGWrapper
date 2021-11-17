@@ -13,6 +13,7 @@ public class SVGImageView: UIImageView {
    let bgColor: UIColor
    let preferedSize: CGSize?
    /**
+    * - Important: ⚠️️ if preferedSize is provided, aspect-ratio is lost, make sure the svgs are square (or make svgs bigger to raster at higher res, or redesign raster to work with destination size etc or something)
     * - Parameters:
     *   - url: "soundcloud.svg"
     *   - foregroundColor: .red
@@ -54,7 +55,7 @@ extension SVGImageView {
    /**
     * Style UIImageView
     */
-   public func style(foregroundColor: UIColor, backgroundColor: UIColor) {
+   public func style(foregroundColor: UIColor, backgroundColor: UIColor = .clear) {
       self.tintColor = foregroundColor
       self.backgroundColor = backgroundColor
    }
