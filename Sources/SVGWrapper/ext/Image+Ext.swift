@@ -21,7 +21,6 @@ extension Image {
       f.preferredRange = .standard
       let r = UIGraphicsImageRenderer(size: size, format: f)
       return r.image{
-//         Swift.print("size:  \(size)")
          $0.cgContext.draw(self, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
       }
    }

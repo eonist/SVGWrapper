@@ -11,7 +11,7 @@ class View: UIView {
    override init(frame: CGRect) {
       super.init(frame: frame)
       let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/airbnb.svg" // soundcloud.svg
-//      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/stack-overflow.svg " //plus.svgsoundcloud.svg
+      // let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/stack-overflow.svg " //plus.svgsoundcloud.svg
       let size: CGSize = .init(width: 200, height: 200)
       let imageView = SVGImageView.init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen, contentMode: .scaleAspectFit, preferedSize: size)
       addSubview(imageView)

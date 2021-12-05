@@ -65,7 +65,6 @@ extension SVGImageView {
    private static func createImage(svgURLStr: String, preferedSize: CGSize?, foregroundColor: NSColor?) -> NSImage? {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
       guard let image = Image(fileURL: svgURL) else { return nil }
-//      Swift.print("image.size:  \(image.size)")
       let size: CGSize = Self.aspectAdjustedSize(imageSize: image.size, preferedSize: preferedSize)
       let rasteredImage: NSImage = image.rasterize(with: size) // preferedSize
       if foregroundColor != nil {
@@ -79,7 +78,6 @@ extension SVGImageView {
     */
    private static func aspectAdjustedSize(imageSize: CGSize, preferedSize: CGSize?) -> CGSize{
       guard var customSize = preferedSize else { return imageSize }
-//      Swift.print("ratio:  \(ratio)")
       if imageSize.height > imageSize.width { // height > width
          let ratio: CGFloat = imageSize.width / imageSize.height
          customSize.width = customSize.width * ratio
@@ -87,7 +85,6 @@ extension SVGImageView {
          let ratio: CGFloat = imageSize.height / imageSize.width
          customSize.height = customSize.height * ratio
       } // else { } do nothing
-//      Swift.print("customSize:  \(customSize)")
       return customSize
    }
 }
