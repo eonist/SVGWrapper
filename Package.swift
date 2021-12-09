@@ -7,7 +7,7 @@ let package = Package(
     products: [
         .library(
             name: "SVGWrapper",
-            targets: ["SVGWrapper"]),
+            targets: ["SVGWrapper"])
     ],
     dependencies: [
         /* Should probably lock to current version */

@@ -22,7 +22,7 @@ extension AppDelegate {
    }
 }
 open class View: NSView {
-   override open var isFlipped: Bool { return true }/*TopLeft orientation*/
+   override open var isFlipped: Bool { true }/*TopLeft orientation*/
    override public init(frame: CGRect) {
       super.init(frame: frame)
       Swift.print("hello world")
@@ -30,7 +30,7 @@ open class View: NSView {
       self.layer?.backgroundColor = NSColor.systemYellow.cgColor
       let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/user.svg" // apple.svg soundcloud.svg
       let size: CGSize = .init(width: 200, height: 200)
-      let imageView = SVGImageView.init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen/*, contentMode: .scaleAspectFit*/, preferedSize: size)
+      let imageView: SVGImageView = .init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen/*, contentMode: .scaleAspectFit*/, preferedSize: size)
       addSubview(imageView)
       imageView.anchorAndSize(to: self, width: size.width, height: size.height, align: .centerCenter, alignTo: .centerCenter)
    }

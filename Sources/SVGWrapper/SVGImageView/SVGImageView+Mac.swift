@@ -76,14 +76,14 @@ extension SVGImageView {
     * Adjust size to ratio
     * - Note: This exists because NSImage doesnt have scaleToFit etc like iOS has (it might have something similar but, was not able to find it)
     */
-   private static func aspectAdjustedSize(imageSize: CGSize, preferedSize: CGSize?) -> CGSize{
+   private static func aspectAdjustedSize(imageSize: CGSize, preferedSize: CGSize?) -> CGSize {
       guard var customSize = preferedSize else { return imageSize }
       if imageSize.height > imageSize.width { // height > width
          let ratio: CGFloat = imageSize.width / imageSize.height
-         customSize.width = customSize.width * ratio
+         customSize.width *= ratio
       } else if imageSize.width > imageSize.height { // width > height
          let ratio: CGFloat = imageSize.height / imageSize.width
-         customSize.height = customSize.height * ratio
+         customSize.height *= ratio
       } // else { } do nothing
       return customSize
    }

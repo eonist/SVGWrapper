@@ -9,7 +9,7 @@ import SwiftDraw
  */
 extension Image {
    func rasterize(_ size: CGSize? = nil) -> UIImage {
-      return rasterize(with: size ?? self.size)
+      rasterize(with: size ?? self.size)
    }
    /**
     * This code is in SwiftDraw as well, but isnt public, or it is, but NSImage has the same name so maybe blocking it?
@@ -20,7 +20,7 @@ extension Image {
       f.opaque = false
       f.preferredRange = .standard
       let r = UIGraphicsImageRenderer(size: size, format: f)
-      return r.image{
+      return r.image {
          $0.cgContext.draw(self, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
       }
    }

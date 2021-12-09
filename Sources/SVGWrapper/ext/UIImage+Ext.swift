@@ -11,7 +11,6 @@ extension UIImage {
             let cgImage = image.cgImage else {
          return nil
       }
-      
       self.init(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
    }
 }
