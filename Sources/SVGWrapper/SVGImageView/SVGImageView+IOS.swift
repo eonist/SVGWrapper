@@ -1,7 +1,7 @@
 #if os(iOS)
 import UIKit
 import SwiftDraw
-import FileSugar
+//import FileSugar
 /**
  * ## Examples:
  * let svgImgView = SVGImgView(url: "soundcloud.svg", foregroundColor: .red, backgroundColor: .blue, contentMode: .scaleAspectFill) // svgimgview extends UIImageView
