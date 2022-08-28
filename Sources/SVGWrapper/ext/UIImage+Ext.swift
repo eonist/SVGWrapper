@@ -7,7 +7,7 @@ extension UIImage {
     * - Fixme: ⚠️️ not in use
     */
    convenience init?(svgNamed name: String, in bundle: Bundle = Bundle.main) {
-      guard let image = Image(named: name, in: bundle)?.rasterize(),
+      guard let image = /*Image*/SVG(named: name, in: bundle)?.rasterize(),
             let cgImage = image.cgImage else {
          return nil
       }

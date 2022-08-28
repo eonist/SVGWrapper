@@ -68,7 +68,7 @@ extension SVGImageView {
     */
    public static func createImage(svgURLStr: String, preferedSize: CGSize?, foregroundColor: UIColor?) -> UIImage? {
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
-      guard let image = Image(fileURL: svgURL) else { return nil }
+      guard let image = /*Image*/SVG(fileURL: svgURL) else { return nil }
       let rasteredImage: UIImage = image.rasterize(with: preferedSize ?? image.size)
       return foregroundColor == nil ? rasteredImage : rasteredImage.withRenderingMode(.alwaysTemplate) // render as template (I presume its needed to support tint color?)
    }
