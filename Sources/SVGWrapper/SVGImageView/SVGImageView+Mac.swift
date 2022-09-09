@@ -63,6 +63,7 @@ extension SVGImageView {
     * - Note: Alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
     */
    private static func createImage(svgURLStr: String, preferedSize: CGSize?, foregroundColor: NSColor?) -> NSImage? {
+      guard FileManager().fileExists(atPath: svgURLStr) else { return nil }
       let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
       guard let image = /*Image*/SVG(fileURL: svgURL) else { return nil }
       let size: CGSize = Self.aspectAdjustedSize(imageSize: image.size, preferedSize: preferedSize)
