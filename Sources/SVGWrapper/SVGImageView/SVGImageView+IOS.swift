@@ -1,7 +1,6 @@
 #if os(iOS)
 import UIKit
 import SwiftDraw
-//import FileSugar
 /**
  * ## Examples:
  * let svgImgView = SVGImgView(url: "soundcloud.svg", foregroundColor: .red, backgroundColor: .blue, contentMode: .scaleAspectFill) // svgimgview extends UIImageView
@@ -13,7 +12,7 @@ public class SVGImageView: UIImageView {
    let bgColor: UIColor
    let preferedSize: CGSize?
    /**
-    * - Important: ⚠️️ if preferedSize is provided, aspect-ratio is lost, make sure the svgs are square (or make svgs bigger to raster at higher res, or redesign raster to work with destination size etc or something)
+    * - Important: ⚠️️ If `preferedSize` is provided, aspect-ratio is lost, make sure the svgs are square (or make svgs bigger to raster at higher res, or redesign raster to work with destination size etc or something)
     * - Parameters:
     *   - url: "soundcloud.svg"
     *   - foregroundColor: .red
@@ -46,7 +45,7 @@ public class SVGImageView: UIImageView {
 extension SVGImageView {
    /**
     * Set image
-    * - Fixme: ⚠️️ maybe set self.contentMode = .scaleAspectFit again here?
+    * - Fixme: ⚠️️ Maybe set self.contentMode = .scaleAspectFit again here?
     */
    public func setImage(url: String) {
       self.image = Self.createImage(svgURLStr: url, preferedSize: preferedSize, foregroundColor: foregroundColor)
@@ -64,7 +63,11 @@ extension SVGImageView {
    }
    /**
     * Image
-    * - Note: if foregroundColor is nil, we dont template the image, needed to tint etc
+    * - Note: If foregroundColor is nil, we dont template the image, needed to tint etc
+    * - Parameters:
+    *   - svgURLStr: - Fixme: ⚠️️
+    *   - preferedSize: - Fixme: ⚠️️
+    *   - foregroundColor: - Fixme: ⚠️️
     */
    public static func createImage(svgURLStr: String, preferedSize: CGSize?, foregroundColor: UIColor?) -> UIImage? {
       guard FileManager().fileExists(atPath: svgURLStr) else { return nil }

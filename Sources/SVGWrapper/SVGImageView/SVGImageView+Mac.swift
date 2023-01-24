@@ -2,7 +2,7 @@
 import Cocoa
 import SwiftDraw
 /**
- * - Note: scalling nsimage: https://stackoverflow.com/questions/13750234/confused-about-nsimageview-scaling
+ * - Note: Scalling NSImage: https://stackoverflow.com/questions/13750234/confused-about-nsimageview-scaling
  * - Note: More advance resizing: https://nshipster.com/image-resizing/
  * ## Examples:
  * let svgImgView = SVGImgView(url: "soundcloud.svg", foregroundColor: .red, backgroundColor: .blue, contentMode: .scaleAspectFill) // svgimgview extends UIImageView
@@ -14,7 +14,12 @@ public class SVGImageView: NSImageView {
    let bgColor: NSColor
    let preferedSize: CGSize?
    /**
-    * - Important: ⚠️️ Unlike iOS, macOS doesn't seem to scale the svg, so prefered size is required, it seems at least for some svgs
+    * - Important: ⚠️️ Unlike `iOS`, `macOS` doesn't seem to scale the svg, so prefered size is required, it seems at least for some svgs
+    * - Parameters:
+    *   - url: - Fixme: ⚠️️
+    *   - foregroundColor: - Fixme: ⚠️️
+    *   - backgroundColor: - Fixme: ⚠️️
+    *   - preferedSize: - Fixme: ⚠️️
     */
    public init(url: String, foregroundColor: NSColor? = .black, backgroundColor: NSColor = .clear/*, contentMode: NSView.ContentMode = .scaleAspectFill*/, preferedSize: CGSize? = nil) {
       self.foregroundColor = foregroundColor
@@ -42,13 +47,17 @@ public class SVGImageView: NSImageView {
 extension SVGImageView {
    /**
     * Set image
+    * - Parameter url: - Fixme: ⚠️️
     */
    public func setImage(url: String) {
       self.image = Self.createImage(svgURLStr: url, preferedSize: self.preferedSize, foregroundColor: foregroundColor)
       style(foregroundColor: foregroundColor, backgroundColor: bgColor)
    }
    /**
-    * Style UIImageView
+    * Style `UIImageView`
+    * - Parameters:
+    *   - foregroundColor: - Fixme: ⚠️️
+    *   - backgroundColor: - Fixme: ⚠️️
     */
    public func style(foregroundColor: NSColor?, backgroundColor: NSColor = .clear) {
       self.foregroundColor = foregroundColor
@@ -61,6 +70,10 @@ extension SVGImageView {
     * Image
     * - Note: On tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4
     * - Note: Alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
+    * - Parameters:
+    *   - svgURLStr: - Fixme: ⚠️️
+    *   - preferedSize: - Fixme: ⚠️️
+    *   - foregroundColor: - Fixme: ⚠️️
     */
    private static func createImage(svgURLStr: String, preferedSize: CGSize?, foregroundColor: NSColor?) -> NSImage? {
       guard FileManager().fileExists(atPath: svgURLStr) else { return nil }
@@ -75,7 +88,10 @@ extension SVGImageView {
    }
    /**
     * Adjust size to ratio
-    * - Note: This exists because NSImage doesnt have scaleToFit etc like iOS has (it might have something similar but, was not able to find it)
+    * - Note: This exists because `NSImage` doesn't have scaleToFit etc like iOS has (it might have something similar but, was not able to find it)
+    * - Parameters:
+    *   - imageSize: - Fixme: ⚠️️
+    *   - preferedSize: - Fixme: ⚠️️
     */
    private static func aspectAdjustedSize(imageSize: CGSize, preferedSize: CGSize?) -> CGSize {
       guard var customSize = preferedSize else { return imageSize }

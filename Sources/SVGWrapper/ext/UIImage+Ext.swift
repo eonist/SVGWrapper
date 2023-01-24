@@ -4,7 +4,7 @@ import SwiftDraw
 
 extension UIImage {
    /**
-    * - Fixme: ⚠️️ not in use
+    * - Fixme: ⚠️️ Not in use, deperecate?
     */
    convenience init?(svgNamed name: String, in bundle: Bundle = Bundle.main) {
       guard let image = Image/*SVG*/(named: name, in: bundle)?.rasterize(),
