@@ -1,7 +1,7 @@
 import UIKit
 @UIApplicationMain
 /**
- * - Fixme: ⚠️️ Rename to SwiftSVGExample?
+ * - Fixme: ⚠️️ Rename to SwiftSVGExample? not super imporatant
  */
 class AppDelegate: UIResponder, UIApplicationDelegate {
    lazy var window: UIWindow? = createWindow()
