@@ -7,7 +7,7 @@ import SwiftDraw
  * addSubview(svgImgView)
  * svgImgView.anchorAndSize(to: self, width: 200, height: 200, align: .centerCenter, alignTo: .centerCenter)
  */
-public class SVGImageView: UIImageView {
+public final class SVGImageView: UIImageView {
    var foregroundColor: UIColor?
    let bgColor: UIColor
    let preferedSize: CGSize?
