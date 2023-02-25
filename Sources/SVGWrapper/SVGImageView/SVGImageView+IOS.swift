@@ -63,7 +63,7 @@ extension SVGImageView {
    }
    /**
     * Image
-    * - Note: If foregroundColor is nil, we dont template the image, needed to tint etc
+    * - Remark: If foregroundColor is nil, we dont template the image, needed to tint etc
     * - Parameters:
     *   - svgURLStr: - Fixme: ⚠️️
     *   - preferedSize: - Fixme: ⚠️️

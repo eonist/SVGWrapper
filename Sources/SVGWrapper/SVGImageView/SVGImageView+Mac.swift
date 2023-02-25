@@ -2,8 +2,8 @@
 import Cocoa
 import SwiftDraw
 /**
- * - Note: Scalling NSImage: https://stackoverflow.com/questions/13750234/confused-about-nsimageview-scaling
- * - Note: More advance resizing: https://nshipster.com/image-resizing/
+ * - Remark: Scalling NSImage: https://stackoverflow.com/questions/13750234/confused-about-nsimageview-scaling
+ * - Remark: More advance resizing: https://nshipster.com/image-resizing/
  * ## Examples:
  * let svgImgView = SVGImgView(url: "soundcloud.svg", foregroundColor: .red, backgroundColor: .blue, contentMode: .scaleAspectFill) // svgimgview extends UIImageView
  * addSubview(svgImgView)
@@ -68,8 +68,8 @@ extension SVGImageView {
    }
    /**
     * Image
-    * - Note: On tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4
-    * - Note: Alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
+    * - Remark: On tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4
+    * - Remark: Alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
     * - Parameters:
     *   - svgURLStr: - Fixme: ⚠️️
     *   - preferedSize: - Fixme: ⚠️️
@@ -88,7 +88,7 @@ extension SVGImageView {
    }
    /**
     * Adjust size to ratio
-    * - Note: This exists because `NSImage` doesn't have scaleToFit etc like iOS has (it might have something similar but, was not able to find it)
+    * - Remark: This exists because `NSImage` doesn't have scaleToFit etc like iOS has (it might have something similar but, was not able to find it)
     * - Parameters:
     *   - imageSize: - Fixme: ⚠️️
     *   - preferedSize: - Fixme: ⚠️️

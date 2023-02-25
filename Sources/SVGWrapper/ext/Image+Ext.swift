@@ -2,10 +2,10 @@
 import UIKit
 import SwiftDraw
 /**
- * - Note: `contentMode.scaleToFill` (scales all sides to fill)
- * - Note: `contentMode.scaleAspectFill` (scalles smallet side to fill, will overflow etc)
- * - Note: `contentMode.center` (no scaling, might overflow)
- * - Note: `contentMode.scaleAspectFit` (fits the largest side, won't overflow)
+ * - Remark: `contentMode.scaleToFill` (scales all sides to fill)
+ * - Remark: `contentMode.scaleAspectFill` (scalles smallet side to fill, will overflow etc)
+ * - Remark: `contentMode.center` (no scaling, might overflow)
+ * - Remark: `contentMode.scaleAspectFit` (fits the largest side, won't overflow)
  */
 extension Image /*SVG*/ {
    func rasterize(_ size: CGSize? = nil) -> UIImage {
