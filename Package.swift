@@ -11,8 +11,8 @@ let package = Package(
     ],
     dependencies: [
         /* Should probably lock to current version */
-        .package(path: "../SwiftDraw"),
-        //.package(url: "https://github.com/swhitty/SwiftDraw.git", .upToNextMajor(from: "0.8.0"))
+        .package(path: "../SwiftDraw")
+        // .package(url: "https://github.com/swhitty/SwiftDraw.git", .upToNextMajor(from: "0.8.0"))
     ],
     targets: [
         .target(
