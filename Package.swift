@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SVGWrapper",
-    platforms: [.iOS(.v13), .macOS(.v10_15)], // update to ios15? 
+    platforms: [.iOS(.v15), .macOS(.v12)],
     products: [
         .library(
             name: "SVGWrapper",
