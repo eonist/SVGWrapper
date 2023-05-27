@@ -7,7 +7,7 @@ import SwiftDraw
  * - Remark: `contentMode.center` (no scaling, might overflow)
  * - Remark: `contentMode.scaleAspectFit` (fits the largest side, won't overflow)
  */
-extension Image /*SVG*/ {
+extension Image { /*SVG*/ 
    func rasterize(_ size: CGSize? = nil) -> UIImage {
       rasterize(with: size ?? self.size)
    }

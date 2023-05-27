@@ -21,7 +21,6 @@ public final class SVGImageView: UIImageView {
     *   - preferedSize: The size that the icon is rasterized at (if nothing is provided, the size of the svg is used)
     */
    public init(url: String, foregroundColor: UIColor? = .black, backgroundColor: UIColor = .clear, contentMode: UIView.ContentMode = .scaleAspectFill, preferedSize: CGSize? = nil) {
-      // Swift.print("foregroundColor:  \(String(describing: foregroundColor))")
       self.foregroundColor = foregroundColor
       self.bgColor = backgroundColor
       self.preferedSize = preferedSize

@@ -30,8 +30,8 @@ public final class SVGImageView: NSImageView {
       self.image = img
       self.wantsLayer = true // if true then view is layer backed
       style(foregroundColor: foregroundColor, backgroundColor: backgroundColor)
-      // self.scaleUnitSquare(to: .init(width: 0, height: 0))
-      // NSImageScaleAxesIndependently
+      // self.scaleUnitSquare(to: .init(width: 0, height: 0)) // - Fixme: ⚠️️ remove?
+      // NSImageScaleAxesIndependently // - Fixme: ⚠️️ remove?
    }
    /**
     * Boilerplate

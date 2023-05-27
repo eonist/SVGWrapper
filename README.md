@@ -5,5 +5,5 @@
 - Should probably use apples SF symbol
 
 ### Todo:
-- Rename project to SVGGraphic?
-- Remove test target
+- Rename project to SVGGraphic? or keep as is?
+- Remove test target, we dont have tests etc
