@@ -10,28 +10,27 @@ import SwiftDraw
  * svgImgView.anchorAndSize(to: self, wifth: 200, height: 200, align: .centerCenter, alignTo: .centerCenter)
  */
 public final class SVGImageView: NSImageView {
-   var foregroundColor: NSColor?
-   let bgColor: NSColor
-   let preferedSize: CGSize?
+   var foregroundColor: NSColor? // The color to use for the SVG's foreground
+   let bgColor: NSColor // The color to use for the SVG's background
+   let preferedSize: CGSize? // The size to rasterize the SVG at. Required for macOS, but optional for iOS.
    /**
-    * - Important: ⚠️️ Unlike `iOS`, `macOS` doesn't seem to scale the svg, so prefered size is required, it seems at least for some svgs
+    * Initializes a new SVGImageView instance with the specified parameters.
     * - Parameters:
-    *   - url: - Fixme: ⚠️️
-    *   - foregroundColor: - Fixme: ⚠️️
-    *   - backgroundColor: - Fixme: ⚠️️
-    *   - preferedSize: - Fixme: ⚠️️
+    *   - url: The URL of the SVG file to load.
+    *   - foregroundColor: The color to use for the SVG's foreground.
+    *   - backgroundColor: The color to use for the SVG's background.
+    *   - preferedSize: The size to rasterize the SVG at. Required for macOS, but optional for iOS.
     */
-   public init(url: String, foregroundColor: NSColor? = .black, backgroundColor: NSColor = .clear/*, contentMode: NSView.ContentMode = .scaleAspectFill*/, preferedSize: CGSize? = nil) {
-      self.foregroundColor = foregroundColor
-      self.bgColor = backgroundColor
-      self.preferedSize = preferedSize
+   public init(url: String, foregroundColor: NSColor? = .black, backgroundColor: NSColor = .clear, preferedSize: CGSize? = nil) {
+      self.foregroundColor = foregroundColor // Set the foreground color of the SVG image view
+      self.bgColor = backgroundColor // Set the background color of the SVG image view
+      self.preferedSize = preferedSize // Set the preferred size of the SVG image view
+      // Create an NSImage instance from the SVG file at the specified URL, with the specified parameters
       let img: NSImage? = Self.createImage(svgURLStr: url, preferedSize: preferedSize, foregroundColor: foregroundColor)
-      super.init(frame: .zero)
-      self.image = img
-      self.wantsLayer = true // if true then view is layer backed
-      style(foregroundColor: foregroundColor, backgroundColor: backgroundColor)
-      // self.scaleUnitSquare(to: .init(width: 0, height: 0)) // - Fixme: ⚠️️ remove?
-      // NSImageScaleAxesIndependently // - Fixme: ⚠️️ remove?
+      super.init(frame: .zero) // Initialize the SVG image view with a zero-sized frame
+      self.image = img // Set the image of the SVG image view to the created NSImage instance
+      self.wantsLayer = true // Enable layer backing for the view
+      style(foregroundColor: foregroundColor, backgroundColor: backgroundColor) // Apply styling to the SVG image view
    }
    /**
     * Boilerplate
@@ -46,63 +45,65 @@ public final class SVGImageView: NSImageView {
  */
 extension SVGImageView {
    /**
-    * Set image
-    * - Parameter url: - Fixme: ⚠️️
+    * Sets the image of the SVG image view to the SVG file at the specified URL.
+    * - Parameter url: The URL of the SVG file to load.
     */
    public func setImage(url: String) {
+      // Set the image of the SVG image view to the created NSImage instance from the SVG file at the specified URL, with the specified parameters
       self.image = Self.createImage(svgURLStr: url, preferedSize: self.preferedSize, foregroundColor: foregroundColor)
+      // Apply styling to the SVG image view
       style(foregroundColor: foregroundColor, backgroundColor: bgColor)
    }
+
    /**
-    * Style `UIImageView`
+    * Applies styling to the SVG image view.
     * - Parameters:
-    *   - foregroundColor: - Fixme: ⚠️️
-    *   - backgroundColor: - Fixme: ⚠️️
+    *   - foregroundColor: The color to use for the SVG's foreground.
+    *   - backgroundColor: The color to use for the SVG's background.
     */
    public func style(foregroundColor: NSColor?, backgroundColor: NSColor = .clear) {
       self.foregroundColor = foregroundColor
       if let color = foregroundColor { // Only set color if it is not nil
-         self.contentTintColor = color
+         self.contentTintColor = color // Set the content tint color of the SVG image view to the foreground color
       }
-      self.layer?.backgroundColor = backgroundColor.cgColor
+      self.layer?.backgroundColor = backgroundColor.cgColor // Set the background color of the SVG image view's layer
    }
    /**
-    * Image
-    * - Remark: On tinting and template image: https://gist.github.com/usagimaru/c0a03ef86b5829fb9976b650ec2f1bf4
-    * - Remark: Alternate tinting here: https://stackoverflow.com/questions/45028530/set-image-color-of-a-template-image
+    * Creates an NSImage instance from the SVG file at the specified URL, with the specified parameters.
     * - Parameters:
-    *   - svgURLStr: - Fixme: ⚠️️
-    *   - preferedSize: - Fixme: ⚠️️
-    *   - foregroundColor: - Fixme: ⚠️️
+    *   - svgURLStr: The URL of the SVG file to load.
+    *   - preferedSize: The size to rasterize the SVG at. If not provided, the size of the SVG is used.
+    *   - foregroundColor: The color to use for the SVG's foreground.
+    * - Returns: A new NSImage instance, or nil if the SVG file could not be loaded.
     */
    private static func createImage(svgURLStr: String, preferedSize: CGSize?, foregroundColor: NSColor?) -> NSImage? {
-      guard FileManager().fileExists(atPath: svgURLStr) else { return nil }
-      let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
-      guard let image = /*SVG*/Image(fileURL: svgURL) else { return nil }
-      let size: CGSize = Self.aspectAdjustedSize(imageSize: image.size, preferedSize: preferedSize)
-      let rasteredImage: NSImage = image.rasterize(with: size) // preferedSize
+      guard FileManager().fileExists(atPath: svgURLStr) else { return nil } // Check if the SVG file exists at the specified URL
+      let svgURL: URL = .init(fileURLWithPath: svgURLStr) // Create a URL instance from the SVG file path
+      guard let image = /*SVG*/Image(fileURL: svgURL) else { return nil } // Create an Image instance from the SVG file
+      let size: CGSize = Self.aspectAdjustedSize(imageSize: image.size, preferedSize: preferedSize) // Calculate the aspect-adjusted size to rasterize the SVG at
+      let rasteredImage: NSImage = image.rasterize(with: size) // Rasterize the Image instance to an NSImage instance with the calculated size
       if foregroundColor != nil {
-         rasteredImage.isTemplate = true // let templatedImage = rasteredImage.withRenderingMode(.alwaysTemplate) // render as template (I presume its needed to support tint color?)
+         rasteredImage.isTemplate = true // Set the NSImage instance to render as a template (to support tint color)
       }
-      return rasteredImage // templatedImage // let uiImage = UIImage.init(cgImage: templated.cgImage!, scale: rasteredImage.scale, orientation: rasteredImage.imageOrientation)
+      return rasteredImage // Return the rasterized NSImage instance
    }
    /**
-    * Adjust size to ratio
-    * - Remark: This exists because `NSImage` doesn't have scaleToFit etc like iOS has (it might have something similar but, was not able to find it)
+    * Calculates the aspect-adjusted size to rasterize the SVG at, based on the provided image size and preferred size.
     * - Parameters:
-    *   - imageSize: - Fixme: ⚠️️
-    *   - preferedSize: - Fixme: ⚠️️
+    *   - imageSize: The size of the SVG image.
+    *   - preferedSize: The preferred size to rasterize the SVG at. If not provided, the size of the SVG is used.
+    * - Returns: The aspect-adjusted size to rasterize the SVG at.
     */
    private static func aspectAdjustedSize(imageSize: CGSize, preferedSize: CGSize?) -> CGSize {
-      guard var customSize = preferedSize else { return imageSize }
-      if imageSize.height > imageSize.width { // height > width
-         let ratio: CGFloat = imageSize.width / imageSize.height
-         customSize.width *= ratio
-      } else if imageSize.width > imageSize.height { // width > height
-         let ratio: CGFloat = imageSize.height / imageSize.width
-         customSize.height *= ratio
-      } // else { } do nothing
-      return customSize
+      guard var customSize = preferedSize else { return imageSize } // If no preferred size is provided, return the original image size
+      if imageSize.height > imageSize.width { // If the image height is greater than the width
+         let ratio: CGFloat = imageSize.width / imageSize.height // Calculate the aspect ratio
+         customSize.width *= ratio // Adjust the width based on the aspect ratio
+      } else if imageSize.width > imageSize.height { // If the image width is greater than the height
+         let ratio: CGFloat = imageSize.height / imageSize.width // Calculate the aspect ratio
+         customSize.height *= ratio // Adjust the height based on the aspect ratio
+      } // If the image is square, do nothing
+      return customSize // Return the aspect-adjusted size
    }
 }
 #endif

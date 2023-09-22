@@ -12,23 +12,24 @@ public final class SVGImageView: UIImageView {
    let bgColor: UIColor
    let preferedSize: CGSize?
    /**
-    * - Important: ⚠️️ If `preferedSize` is provided, aspect-ratio is lost, make sure the svgs are square (or make svgs bigger to raster at higher res, or redesign raster to work with destination size etc or something)
+    * Initializes a new SVGImageView instance with the specified parameters.
     * - Parameters:
-    *   - url: "soundcloud.svg"
-    *   - foregroundColor: .red
-    *   - backgroundColor: .blue
-    *   - contentMode: .scaleAspectFill etc
-    *   - preferedSize: The size that the icon is rasterized at (if nothing is provided, the size of the svg is used)
+    *   - url: The URL of the SVG file to load.
+    *   - foregroundColor: The color to use for the SVG's foreground.
+    *   - backgroundColor: The color to use for the SVG's background.
+    *   - contentMode: The content mode to use for the image view.
+    *   - preferedSize: The size to rasterize the SVG at. If not provided, the size of the SVG is used.
     */
    public init(url: String, foregroundColor: UIColor? = .black, backgroundColor: UIColor = .clear, contentMode: UIView.ContentMode = .scaleAspectFill, preferedSize: CGSize? = nil) {
-      self.foregroundColor = foregroundColor
-      self.bgColor = backgroundColor
-      self.preferedSize = preferedSize
-      // - Fixme: ⚠️️ we might want to just call setImage, for simplicity etc
+      self.foregroundColor = foregroundColor // Set the foreground color of the SVG image view
+      self.bgColor = backgroundColor // Set the background color of the SVG image view
+      self.preferedSize = preferedSize // Set the preferred size of the SVG image view
+      // FIXME: We might want to just call setImage for simplicity.
+      // Create a UIImage instance from the SVG file at the specified URL, with the specified parameters
       let img: UIImage? = Self.createImage(svgURLStr: url, preferedSize: preferedSize, foregroundColor: foregroundColor)
-      super.init(image: img)
-      self.contentMode = .scaleAspectFit
-      style(foregroundColor: self.foregroundColor, backgroundColor: self.bgColor)
+      super.init(image: img) // Initialize the SVG image view with the created UIImage instance
+      self.contentMode = .scaleAspectFit // Set the content mode of the SVG image view
+      style(foregroundColor: self.foregroundColor, backgroundColor: self.bgColor) // Apply styling to the SVG image view
    }
    /**
     * Boilerplate
@@ -43,37 +44,43 @@ public final class SVGImageView: UIImageView {
  */
 extension SVGImageView {
    /**
-    * Set image
-    * - Fixme: ⚠️️ Maybe set self.contentMode = .scaleAspectFit again here?
+    * Sets the image of the SVG image view to the SVG file at the specified URL.
+    * - Parameters:
+    *   - url: The URL of the SVG file to load.
     */
    public func setImage(url: String) {
       self.image = Self.createImage(svgURLStr: url, preferedSize: preferedSize, foregroundColor: foregroundColor)
       style(foregroundColor: foregroundColor, backgroundColor: bgColor)
    }
+
    /**
-    * Style UIImageView
+    * Applies styling to the SVG image view.
+    * - Parameters:
+    *   - foregroundColor: The color to use for the SVG's foreground.
+    *   - backgroundColor: The color to use for the SVG's background.
     */
    public func style(foregroundColor: UIColor?, backgroundColor: UIColor = .clear) {
-      self.foregroundColor = foregroundColor
+      self.foregroundColor = foregroundColor // Set the foreground color of the SVG image view
       if let color = foregroundColor { // Only set color if it is not nil
-         self.tintColor = color
+         self.tintColor = color // Set the tint color of the SVG image view to the foreground color
       }
-      self.backgroundColor = backgroundColor
+      self.backgroundColor = backgroundColor // Set the background color of the SVG image view
    }
+
    /**
-    * Image
-    * - Remark: If foregroundColor is nil, we dont template the image, needed to tint etc
+    * Creates a UIImage instance from the SVG file at the specified URL, with the specified parameters.
     * - Parameters:
-    *   - svgURLStr: - Fixme: ⚠️️
-    *   - preferedSize: - Fixme: ⚠️️
-    *   - foregroundColor: - Fixme: ⚠️️
+    *   - svgURLStr: The URL of the SVG file to load.
+    *   - preferedSize: The size to rasterize the SVG at. If not provided, the size of the SVG is used.
+    *   - foregroundColor: The color to use for the SVG's foreground.
+    * - Returns: A new UIImage instance, or nil if the SVG file could not be loaded.
     */
    public static func createImage(svgURLStr: String, preferedSize: CGSize?, foregroundColor: UIColor?) -> UIImage? {
-      guard FileManager().fileExists(atPath: svgURLStr) else { return nil }
-      let svgURL: URL = .init(fileURLWithPath: svgURLStr) // else { fatalError("⚠️️ Unable to create URL from: \(svgURLStr)") }// URL(string: "https://openclipart.org/download/181651/manhammock.svg")!
-      guard let image = Image(fileURL: svgURL) else { return nil }
-      let rasteredImage: UIImage = image.rasterize(with: preferedSize ?? image.size)
-      return foregroundColor == nil ? rasteredImage : rasteredImage.withRenderingMode(.alwaysTemplate) // render as template (I presume its needed to support tint color?)
+      guard FileManager().fileExists(atPath: svgURLStr) else { return nil } // Check if the SVG file exists at the specified URL
+      let svgURL: URL = .init(fileURLWithPath: svgURLStr) // Create a URL instance from the SVG file path
+      guard let image = Image(fileURL: svgURL) else { return nil } // Create an Image instance from the SVG file
+      let rasteredImage: UIImage = image.rasterize(with: preferedSize ?? image.size) // Rasterize the Image instance to a UIImage instance with the specified size
+      return foregroundColor == nil ? rasteredImage : rasteredImage.withRenderingMode(.alwaysTemplate) // Return the rasterized UIImage instance with the specified rendering mode (if foreground color is not nil)
    }
 }
 #endif

@@ -24,14 +24,16 @@ extension AppDelegate {
 open class View: NSView {
    override open var isFlipped: Bool { true } /*TopLeft orientation*/
    override public init(frame: CGRect) {
-      super.init(frame: frame)
-      Swift.print("hello world")
-      self.wantsLayer = true/*if true then view is layer backed*/
-      self.layer?.backgroundColor = NSColor.systemYellow.cgColor
-      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/user.svg" // apple.svg soundcloud.svg
-      let size: CGSize = .init(width: 200, height: 200)
-      let imageView: SVGImageView = .init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen/*, contentMode: .scaleAspectFit*/, preferedSize: size)
-      addSubview(imageView)
+      super.init(frame: frame) // Initialize the view with the specified frame
+      Swift.print("hello world") // Print "hello world" to the console
+      self.wantsLayer = true // Enable layer backing for the view
+      self.layer?.backgroundColor = NSColor.systemYellow.cgColor // Set the background color of the view's layer
+      let svgURLStr: String = Bundle.main.resourcePath! + "/Assets.bundle/user.svg" // Set the URL of the SVG file to load
+      let size: CGSize = .init(width: 200, height: 200) // Set the size to rasterize the SVG at
+      // Create a new SVGImageView instance with the specified parameters
+      let imageView: SVGImageView = .init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen, preferedSize: size)
+      addSubview(imageView) // Add the SVG image view as a subview of the current view
+      // Anchor and size the SVG image view to the current view
       imageView.anchorAndSize(to: self, width: size.width, height: size.height, align: .centerCenter, alignTo: .centerCenter)
    }
    /**

@@ -12,10 +12,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 extension AppDelegate {
    func createWindow() -> UIWindow {
-      let win = UIWindow(frame: UIScreen.main.bounds)
-      let vc = ViewController()
-      win.rootViewController = vc
-      win.makeKeyAndVisible() // Important since we have no Main storyboard anymore
-      return win
+      let win = UIWindow(frame: UIScreen.main.bounds) // Create a new UIWindow instance with the screen bounds
+      let vc = ViewController() // Create a new ViewController instance
+      win.rootViewController = vc // Set the root view controller of the window to the view controller instance
+      win.makeKeyAndVisible() // Make the window key and visible (important since there is no Main storyboard)
+      return win // Return the created window instance
    }
 }
