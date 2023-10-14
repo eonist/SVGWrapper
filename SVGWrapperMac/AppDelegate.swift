@@ -34,7 +34,13 @@ open class View: NSView {
       let imageView: SVGImageView = .init(url: svgURLStr, foregroundColor: .red, backgroundColor: .systemGreen, preferedSize: size)
       addSubview(imageView) // Add the SVG image view as a subview of the current view
       // Anchor and size the SVG image view to the current view
-      imageView.anchorAndSize(to: self, width: size.width, height: size.height, align: .centerCenter, alignTo: .centerCenter)
+      imageView.anchorAndSize(
+         to: self, // The view to anchor and size the view to.
+         width: size.width, // The width of the view.
+         height: size.height, // The height of the view.
+         align: .centerCenter, // The horizontal and vertical alignment of the view.
+         alignTo: .centerCenter // The horizontal and vertical alignment of the anchor view.
+      )
    }
    /**
     * Boilerplate
